@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GeoBrixel</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+  <!-- Lora for About section -->
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+  <!-- tsParticles Library -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Base Styles */
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1e1f31 0%, #2a2a4e 100%);
+      color: #e0e0e0;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    /* Particle background */
+    #tsparticles { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+    /* Header enhancements */
+    header {
+      position: sticky; top: 0;
+      background: rgba(18,18,37,0.75);
+      backdrop-filter: blur(12px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 2px solid #9b5de5;
+      z-index: 10;
+    }
+    header::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg, #9b5de5, #b3b3ff, #9b5de5);
+      background-size: 200% 100%;
+      animation: slide 4s linear infinite;
+    }
+    @keyframes slide { to { background-position: 200% 0; } }
+    .logo { font-family: 'Orbitron', sans-serif; font-size: 2rem; color: #9b5de5; letter-spacing: 1px; }
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      position: relative; color: #ccc; text-decoration: none;
+      font-weight: 500; padding: 0.5rem; transition: color 0.3s;
+    }
+    nav a::after {
+      content: ''; position: absolute; bottom: -6px; left: 50%;
+      width: 0; height: 2px; background: #9b5de5;
+      transition: width 0.3s, left 0.3s;
+    }
+    nav a:hover { color: #fff; }
+    nav a:hover::after { width: 100%; left: 0; }
+    .btn-header {
+      margin-left: 2rem; padding: 0.5rem 1rem;
+      background: linear-gradient(90deg, #9b5de5, #b3b3ff);
+      color: #fff; border: none; border-radius: 4px;
+      font-weight: 600; cursor: pointer; transition: transform 0.3s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-header:hover { transform: scale(1.05); }
+
+    /* Hero */
+    .hero {
+      text-align: center; padding: 5rem 2rem;
+      background: url('hero_background_brixeline.png') center/cover fixed;
+      position: relative; z-index: 1; animation: fadeIn 2s ease-in;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif; font-size: 4rem; color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      font-family: 'Montserrat', sans-serif; font-size: 1.25rem; color: #ccc;
+      max-width: 700px; margin: 0 auto; line-height: 1.6;
+    }
+
+    /* Services */
+
+    .section {
+      padding: 4rem 2rem; max-width: 1000px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .section h2 {
+      text-align: center; font-family: 'Orbitron', sans-serif;
+      font-size: 2rem; margin-bottom: 2rem; color: #b3b3ff;
+    }
+    .card-container {
+      display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+    }
+    .card-link { text-decoration: none; }
+    .card {
+      background: #2f2f47; padding: 2rem; border-radius: 10px;
+      width: 280px; text-align: center; transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer; position: relative; z-index: 1;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px 5px rgba(155, 93, 229, 0.7); /* purple glow */
+    }
+    .card h3 { color: #9b5de5; margin: 0.75rem 0 0.75rem; }
+    .card p { color: #ccc; font-size: 0.95rem; }
+
+    /* icon styling */
+    .icon {
+      width: 40px; height: 40px;
+      color: #9b5de5;
+      display: inline-block;
+    }
+
+   /* === About (screenshot style) === */
+.about-pro{
+  background:#121826;            /* deep navy */
+  border-radius:10px;
+  padding: clamp(2rem, 5vw, 3rem);
+  max-width:1100px;
+  margin: 3rem auto 0;
+  display:grid;
+  grid-template-columns: 1.15fr 1fr; /* text : photos */
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+.about-pro .about-title{
+  font-family:'Orbitron', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  margin: 0 0 .75rem 0;
+  letter-spacing:.2px;
+  color:#ffffff;                 /* “About” in white */
+}
+
+.about-pro .about-title .brand{
+  background: linear-gradient(90deg,#9b5de5 0%, #b3b3ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;            /* gradient text */
+}
+
+.about-pro p{
+  font-family:'Lora', serif;
+  color:#cfd3df;
+  font-size: clamp(1rem, 1.6vw, 1.08rem);
+  line-height: 1.8;
+  margin: 0 0 1.1rem 0;
+}
+
+/* photos grid: 1 wide on top, 2 small below */
+.about-photos{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 14px;
+  align-content:start;
+}
+.about-photos .photo{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:cover;
+  border-radius:8px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset;
+}
+.about-photos .big{
+  grid-column: 1 / -1;          /* span both columns */
+  aspect-ratio: 16/9;
+}
+.about-photos .small{
+  aspect-ratio: 4/3;
+}
+
+/* stack on small screens */
+@media (max-width: 800px){
+  .about-pro{ grid-template-columns: 1fr; }
+  .about-photos{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px){
+  .about-photos{ grid-template-columns: 1fr; }
+  .about-photos .big{ grid-column: auto; }
+}
+
+
+    /* Contact */
+    .contact {
+      background: #1e1f31; border-radius: 10px;
+      padding: 3rem 2rem; margin: 3rem auto 0; max-width: 800px;
+      animation: fadeInUp 1.5s ease forwards; position: relative; z-index: 1;
+    }
+    .contact h2 {
+      text-align: center; font-family: 'Orbitron', sans-serif;
+      font-size: 2rem; margin-bottom: 1.5rem; color: #b3b3ff;
+    }
+    .contact form {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .contact input, .contact textarea {
+      padding: 0.75rem; border: none; border-radius: 8px;
+      background: #2a2a4e; color: #fff; font-size: 1rem;
+    }
+    .contact button {
+      padding: 0.75rem; border: none; border-radius: 8px;
+      background: #9b5de5; color: #fff; font-weight: bold;
+      cursor: pointer; transition: background 0.3s;
+    }
+    .contact button:hover { background: #7b36e0; }
+
+  /* Footer (matches screenshot style) */
+.footer-brand .brand-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 .5rem 0;
+}
+.footer-brand .brand-tagline {
+  font-size: .95rem;
+  color: #aeb6c8;
+  line-height: 1.4;
+  margin: 0;
+}
+footer.site-footer{
+  background: #121525;
+  color:#cfd5e1;
+  padding: 3rem 2rem;
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;  /* ✅ Added space above footer */
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer-col h4{
+  margin: 0 0 .75rem 0;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #e6e9f2;
+  font-size: .95rem;
+}
+.footer-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .65rem;
+}
+.footer-link{
+  text-decoration: none;
+  color: #cfd5e1;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+}
+.footer-link:hover{ color:#ffffff; }
+.footer-link i{ 
+  width: 18px; 
+  height: 18px; 
+  color: #cfd5e1;
+}
+.footer-newsletter{
+  display:flex;
+  max-width: 420px;
+}
+.footer-newsletter input{
+  flex:1;
+  padding:.85rem .95rem;
+  border: 1px solid #2b3344;
+  background:#253044;
+  color:#e6e9f2;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+}
+.footer-newsletter input::placeholder{ color:#94a0b8; }
+.footer-newsletter button{
+  padding:.85rem 1.1rem;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  font-weight:700;
+  color:#fff;
+  background: linear-gradient(90deg,#9b5de5,#b3b3ff);
+  box-shadow: 0 10px 28px rgba(155,93,229,.35);
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease;
+}
+.footer-newsletter button:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+.footer-divider{
+  height:1px;
+  background: rgba(255,255,255,.08);
+  width:100%;
+  margin-top: .25rem;
+}
+.footer-copy{
+  text-align:center;
+  color:#aeb6c8;
+  font-size: .95rem;
+  margin: 0;
+}
+@media (max-width: 800px){
+  .footer-grid{ grid-template-columns: 1fr; }
+}
+    /* Animations */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(80px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <!-- Particle Background -->
+  <div id="tsparticles"></div>
+  
+  <header>
+    <div class="logo">GeoBrixel</div>
+    <nav>
+      <a href="newdes.html">Home</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn-header">Get Started</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Engineering the Future</h1>
+    <p>GeoBrixel delivers innovative, efficient, and elegant engineering solutions.</p>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <h2>Our Engineering Services</h2>
+    <div class="card-container">
+      <a href="infrastructure.html" class="card-link">
+        <div class="card">
+          <i data-lucide="git-branch" class="icon"></i>
+          <h3>Infrastructure</h3>
+          <p>Explore our infrastructure services including roads, networks, and more.</p>
+        </div>
+      </a>
+      <a href="surveying.html" class="card-link">
+        <div class="card">
+          <i data-lucide="scan-search" class="icon"></i>
+          <h3>Surveying</h3>
+          <p>Discover our surveying services: site surveys, contour mapping, and preparation.</p>
+        </div>
+      </a>
+      <a href="building.html" class="card-link">
+        <div class="card">
+          <i data-lucide="building" class="icon"></i>
+          <h3>Building</h3>
+          <p>Learn about our building services: design, shop drawings, and project management.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- About -->
+<section id="about" class="about-pro">
+  <div class="about-text">
+    <h2 class="about-title">About <span class="brand">GeoBrixel</span></h2>
+
+    <p>
+      GeoBrixel Consultant, based in Dubai, is a leading general-contracting and
+      engineering-consultancy firm specializing in external infrastructure across the UAE.
+      We’re renowned for high-quality workmanship, on-time delivery and innovative
+      solutions tailored to both public and private sector clients.
+    </p>
+
+    <p>
+      Our mission is to empower businesses and developers by designing forward-thinking
+      systems that last. Whether it’s complex architectural support or energy-saving tech,
+      we aim to redefine what’s possible through elegant, practical innovation. At GeoBrixel,
+      we blend creativity with engineering precision.
+    </p>
+  </div>
+
+  <div class="about-photos">
+    <!-- Top wide image -->
+    <img class="photo big" src="imagesabout1.png" alt="Infrastructure at sunset">
+
+    <!-- Bottom two smaller images -->
+    <img class="photo small" src="imagesabout2.jpg" alt="Blueprints and planning">
+    <img class="photo small" src="imagesabout3.jpg" alt="Surveying equipment"> <!-- replace with your 3rd photo -->
+  </div>
+</section>
+
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form action="https://formspree.io/f/mjkopyba" method="POST">
+      <input type="hidden" name="_subject" value="New GeoBrixel Contact Submission">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="_replyto" placeholder="Email Address" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer class="site-footer">
+  <div class="footer-grid">
+    <!-- ✅ New brand/intro column -->
+    <div class="footer-col footer-brand">
+      <h3 class="brand-name">GeoBrixel</h3>
+      <p class="brand-tagline">Shaping the future with design & tech.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul class="footer-list">
+        <li><a class="footer-link" href="#about">About us</a></li>
+        <li><a class="footer-link" href="#services">Services</a></li>
+        <li><a class="footer-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Follow</h4>
+      <ul class="footer-list">
+        <li><a class="footer-link" href="#"><i data-lucide="facebook"></i>Facebook</a></li>
+        <li><a class="footer-link" href="#"><i data-lucide="instagram"></i>Instagram</a></li>
+        <li><a class="footer-link" href="#"><i data-lucide="twitter"></i>Twitter</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Newsletter</h4>
+      <form class="footer-newsletter">
+        <input type="email" placeholder="Enter your email" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer-divider"></div>
+  <p class="footer-copy">© 2025 GeoBrixel. All rights reserved.</p>
+</footer>
+
+  <script>
+    // Initialize lucide icons
+    lucide.createIcons();
+
+    // tsParticles config
+    tsParticles.load("tsparticles", {
+      particles: {
+        number: { value: 100 },
+        color: { value: "#9b5de5" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: { min: 1, max: 4 } },
+        move: { enable: true, speed: 1, direction: "none", outModes: "out" },
+        links: { enable: true, distance: 150, color: "#b3b3ff", opacity: 0.4, width: 1 }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          resize: true
+        },
+        modes: { repulse: { distance: 100, duration: 0.4 } }
+      },
+      detectRetina: true
+    });
+  </script>
+</body>
+</html>

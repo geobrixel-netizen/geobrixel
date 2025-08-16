@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Surveying Services – GeoBrixel</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&family=Montserrat&display=swap" rel="stylesheet">
+  <!-- AOS for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- tsParticles Library -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+  <style>
+    /* Base */
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1e1f31, #2a2a4e);
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+    /* Particles */
+    #tsparticles {
+      position: fixed; inset: 0; z-index: -1;
+    }
+    /* Header */
+    header {
+      position: sticky; top: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(18,18,37,0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid #9b5de5;
+      z-index: 10;
+    }
+    header::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 4px;
+      background: linear-gradient(90deg, #9b5de5, #b3b3ff, #9b5de5);
+      background-size: 200% 100%; animation: slide 5s linear infinite;
+    }
+    @keyframes slide { to { background-position: 200% 0; } }
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem; color: #9b5de5; letter-spacing: 1px;
+    }
+    nav { display: flex; gap: 1.5rem; }
+    nav a, .btn-header {
+      position: relative; color: #ccc; text-decoration: none; font-weight: 500;
+      padding: 0.5rem; transition: color 0.3s;
+    }
+    nav a::after {
+      content: ''; position: absolute; bottom: -4px; left: 50%;
+      width: 0; height: 2px; background: #9b5de5;
+      transition: width 0.3s, left 0.3s;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    nav a:hover::after {
+      width: 100%; left: 0;
+    }
+    .btn-header {
+      padding: 0.5rem 1rem; border-radius: 4px;
+      background: linear-gradient(90deg, #9b5de5, #b3b3ff);
+      color: #fff; border: none; cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .btn-header:hover { transform: scale(1.05); }
+
+    /* Title */
+    .page-title {
+      text-align: center; padding: 4rem 2rem;
+    }
+    .page-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #9b5de5, #b3b3ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin: 0 0 1rem;
+    }
+    .page-title p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem; color: #ccc;
+    }
+
+    /* Accordion Panels */
+    .accordion {
+      max-width: 800px; margin: 2rem auto;
+    }
+    details {
+      background: #1e1f31;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+    }
+    summary {
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.25rem;
+      color: #b3b3ff;
+      outline: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary:after {
+      content: '▸'; float: right; transition: transform 0.3s;
+    }
+    details[open] summary:after { transform: rotate(90deg); }
+    details p, details ul {
+      margin: 1rem 0 0;
+      font-size: 1rem; line-height: 1.6;
+      color: #ddd;
+    }
+    details ul { list-style: disc inside; }
+    details ul ul { list-style: circle inside; margin-left: 1rem; }
+
+    /* Footer */
+    footer {
+      background: rgba(18,18,37,0.85);
+      padding: 3rem 2rem;
+      color: #ccc;
+      clip-path: polygon(0 10%,100% 0,100% 100%,0% 100%);
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 2rem; margin-top: 3rem;
+    }
+    .footer-section h4 {
+      font-family: 'Orbitron', sans-serif;
+      color: #9b5de5; margin-bottom: 1rem;
+      position: relative; letter-spacing: 1px;
+    }
+    .footer-section h4::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0;
+      width: 40px; height: 2px; background: #9b5de5;
+    }
+    .footer-section ul {
+      list-style: none; padding: 0; display: flex;
+      flex-direction: column; gap: 0.5rem;
+    }
+    .footer-section a {
+      text-decoration: none; color: #ccc;
+      transition: color 0.3s;
+    }
+    .footer-section a:hover { color: #fff; }
+
+    /* Animations */
+    [data-aos] { opacity: 0; transform: translateY(20px); }
+  </style>
+</head>
+<body>
+  <!-- Particles -->  
+  <div id="tsparticles"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">GeoBrixel</div>
+    <nav>
+      <a href="newdes.html">Home</a>
+      <a href="infrastructure.html">Infrastructure</a>
+      <a href="building.html">Building</a>
+      <a href="surveying.html">Surveying</a>
+      <!-- Updated: Get Started now links to contact form -->
+      <a href="newdes.html#contact" class="btn-header">Get Started</a>
+    </nav>
+  </header>
+
+  <!-- Title -->
+  <div class="page-title" data-aos="fade-up">
+    <h1>Surveying Services</h1>
+    <p>Our surveying expertise ensures precision from site surveys to contour mapping.</p>
+  </div>
+
+  <!-- Accordion -->
+  <div class="accordion">
+    <details data-aos="fade-up">
+      <summary>Site Surveying Work</summary>
+      <p>Comprehensive on-site measurements and topographic surveys using the latest equipment.</p>
+    </details>
+    <details data-aos="fade-up" data-aos-delay="100">
+      <summary>Contour Drawing / Preparation</summary>
+      <p>Generation of detailed contour maps and preparation of digital terrain models.</p>
+    </details>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-section" data-aos="fade-in">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="newdes.html">Home</a></li>
+        <li><a href="infrastructure.html">Infrastructure</a></li>
+        <li><a href="building.html">Building</a></li>
+      </ul>
+    </div>
+    <div class="footer-section" data-aos="fade-in" data-aos-delay="100">
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+    <div class="footer-section" data-aos="fade-in" data-aos-delay="200">
+      <h4>Newsletter</h4>
+      <form>
+        <input type="email" placeholder="Email address" required style="flex:1;padding:0.5rem;border:none;border-radius:4px 0 0 4px;" />
+        <button style="padding:0.5rem 1rem;border:none;border-radius:0 4px 4px 0;background:#9b5de5;color:#fff;cursor:pointer;">Subscribe</button>
+      </form>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, duration: 800 });
+    tsParticles.load("tsparticles", {
+      fpsLimit: 60,
+      interactivity: { events: { onHover: { enable: true, mode: "repulse" }, resize: true } },
+      particles: {
+        color: { value: ["#9b5de5", "#b3b3ff"] },
+        links: { enable: true, distance: 150, color: "#888", opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 2 },
+        number: { density: { enable: true, area: 800 }, value: 80 },
+        opacity: { value: 0.6 },
+        size: { value: 3 }
+      }
+    });
+  </script>
+</body>
+</html>
